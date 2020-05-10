@@ -1,0 +1,151 @@
+#注册牛客网，LeetCode()
+#若果a+b+c = 1000， 并且a^2 + b^2 = c^2,求出a,b,c可能的组合
+#解决同一个问题，时间短的算法更好
+#第一种算法
+# import time
+# start_time = time.time()
+# for a in range(0,1001):
+#     for b in range(0,1001):
+#         for c in range(0,1001):
+#             if a+b+c == 1000 and a**2+b**2 == c**2:
+#                 print("a,b,c:%d,%d,%d"%(a,b,c))
+
+# end_time = time.time()
+# print('运行时间为：%f'%(end_time - start_time))
+
+#为了让执行时间更短，提出第二种算法，双重循环
+# import time  
+# start_time = time.time()
+# for a in range(0,1001):
+#     for b in range(0,1001):
+#         c = 1000 -a -b
+#         if a**2 + b**2 == c**2:
+#             print("a,b,c:%d,%d,%d"%(a,b,c))
+
+# end_time = time.time()
+# print('运行时间为：%f'%(end_time - start_time))
+'''
+a,b,c:0,500,500
+a,b,c:200,375,425
+a,b,c:375,200,425
+a,b,c:500,0,500
+运行时间为：1.425002
+'''
+
+#作业：计算前1000个正整数的和(2种)
+#第一种
+# sum = 0
+# for i in range(1, 1001):
+#     sum = sum + i
+# print(sum)
+# # 第二种
+# sum = 0
+# i = 1
+# while (i < 1001):
+#     sum = sum + i
+#     i = i+1
+# print(sum)
+#第三种
+#print(sum(range(1,1001)))
+
+
+#思考：都可以从哪些角度去优化程序
+
+'''
+    1.什么是算法？
+    算法是独立存在的一种解决问题的方法和思想!!!
+    2.算法的五大特性
+        输入：算法具有0个或者多个输入
+        输出：算法至少有1个或者多个输出
+        有穷性：算法要在有限的步骤之后会自动结束，而不会无限循环，并且每一个步骤可以在可接受的时间内完成；
+        确定性：算法的每一个步骤都有确定的含义，不会出现二义性
+        可行性：算法的每一步都是可行的(每一部都能够执行有限的次数完成)
+    3.算法效率衡量
+        实现算法程序的执行的时间可以反映出来算法的效率
+        单纯依靠运行时间来比较算法的优劣不一定是客观准确的(程序的运行离不开计算机环境，所以硬件，操作系统)
+    4.最终算法用什么衡量？
+        时间复杂度
+    5.表示法：大O记法
+        假设计算机执行算法每个基本操作的时间是固定的一个时间单位，那么有多少个基本操作就代表会花费多少时间单位，虽然对于不同的机器环境而言，确切的时间单位是不同的，但是对于算法进行多少个基本操作在规模数量上是相同的，因此，可以忽略机器环境的影响而客观地反应算法的时间效率，用“大O记法”
+        O(n^3)    100n^2    1000n^2
+        O(n^2)
+    6.时间复杂度分类
+      最优时间复杂度：算法完成工作最少需要多少基本操作（过于理想化，没什么参考价值）
+      最坏时间复杂度：.......最多.....（提供了一种保证，表明算法在此程度的基本操作中一定能完成工作）
+      平均时间复杂度：.......平均.....（对算法整体一个全面的评价，但是这种衡量方式没有保证）
+
+      我们关注算法的最坏情况!!! --->最坏时间复杂度
+
+    7.时间复杂度的几条基本计算规则
+      基本操作，也就是只有常数项，认为其时间复杂度为O(1)
+      顺序结构，时间复杂度按加法进行计算
+      循环结构，时间复杂度按乘法进行计算
+      分支：取最大值
+      判断一个算法的效率时，只需要关注操作数量的最高次项，其他次要项和常数项可以忽略
+      没有特殊情况下，我们分析的都是最坏时间复杂度
+
+    8.练习
+    12                                O(1)
+    2n+3                              O(n)
+    3n^2 + 2n + 1                     O(n^2)
+    5log2n + 20                       O(logn)
+    2n + 5nlog2n + 20                 O(nlogn)
+    100000n^2 + 2*n^3 + 4             O(n^3)
+    2^n                               O(2^n)
+
+    O(1) < O(logn) < O(n) < O(nlogn) < O(n^2) < O(n^3) < O(2^n) < O(n!) < O(n^n)
+
+    9.练习：求前n个正整数的和(高斯算法)
+
+'''
+# import time
+
+
+# def sum_of_n(n):
+#     start_time = time.time()
+#     the_sum = 0
+#     for i in range(1,n+1):
+#         the_sum = the_sum + i
+#     end_time = time.time()
+#     return the_sum,end_time-start_time
+
+# for i in range(5):
+#     print(sum_of_n(100000000))
+
+
+# def sum_of_n_2(n):
+    
+#     return(n(n+1)/2) 
+# start = time.time()
+# print(sum_of_n(100000000))
+# end = time.time()
+# print(end-start)
+
+
+'''
+    练习：编写函数求出列表中的最小值，
+    要求：函数1：O(n^2)    两两比较
+         函数2：O(n)      设置一个临时变量，更优化的算法就是把这个临时变量设置成列表中的第一个元素
+'''
+
+my_list = [1000,3,4,5,6,8,100,3,2]
+
+# def get_min(my_list):
+#     for i in range(len(my_list)):
+#         for j in range(len(my_list)):
+#             if my_list[i] < my_list[j]:
+#                 continue
+#             else:
+#                 return my_list[i]
+
+# print(get_min(my_list))
+
+
+def get_min2(my_list):
+    min_num = my_list[0]
+    for i in range(len(my_list)):
+        if my_list[i] < min_num:
+            min_num = my_list[i]
+    return min_num
+
+print(get_min2(my_list))
