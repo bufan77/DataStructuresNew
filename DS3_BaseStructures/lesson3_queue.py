@@ -102,85 +102,85 @@
                 打印结束后，将打印机状态设置为空闲
 
 '''
-import random
-from pythonds.basic.queue import Queue
-class Printer:
-    #打印机初始化
-    def __init__(self,ppm):
-        #设置打印的速率    pagerate为每页打印所需要的时间，设定好后便是恒定的值
-        self.pagerate = ppm
-        #记录当前正在处理的任务
-        self.currentTask = None
-        #打印机当前任务的剩余时间
-        self.timeRemaining = 0
+# import random
+# from pythonds.basic.queue import Queue
+# class Printer:
+#     #打印机初始化
+#     def __init__(self,ppm):
+#         #设置打印的速率    pagerate为每页打印所需要的时间，设定好后便是恒定的值
+#         self.pagerate = ppm
+#         #记录当前正在处理的任务
+#         self.currentTask = None
+#         #打印机当前任务的剩余时间
+#         self.timeRemaining = 0
 
-    #内部任务需要的时间计算函数
-    def tick(self):
-        if self.currentTask != None: #有任务需要处理
-            self.timeRemaining = self.timeRemaining - 1  # 打印，也就是将剩余打印时间减一
-            if self.timeRemaining <= 0:   # 当前任务打印结束
-                self.currentTask = None
+#     #内部任务需要的时间计算函数
+#     def tick(self):
+#         if self.currentTask != None: #有任务需要处理
+#             self.timeRemaining = self.timeRemaining - 1  # 打印，也就是将剩余打印时间减1
+#             if self.timeRemaining <= 0:   # 当前任务打印结束
+#                 self.currentTask = None
 
-    #切换打印机状态
-    def busy(self):
-        if self.currentTask != None:
-            if self.currentTask != None:
-                return True
-            else:
-                return False
+#     #切换打印机状态
+#     def busy(self):
+#         if self.currentTask != None:
+#             if self.currentTask != None:
+#                 return True
+#             else:
+#                 return False
     
-    def startNew(self,newTask):
-        # newtask 为新的任务
-        self.currentTask = newTask
-        self.timeRemaining = newTask.getPages()*60/self.pagerate  #计算新的剩余打印时间
+#     def startNew(self,newTask):
+#         # newtask 为新的任务
+#         self.currentTask = newTask
+#         self.timeRemaining = newTask.getPages()*60/self.pagerate  #计算新的剩余打印时间
 
 
-class Task:
-    #任务初始化
-    def __init__(self,time):
-         # time 为传入的任务创建时间，也就是入队时间
-        self.timestamp = time
-        self.pages = random.randrange(1,21)  # 随机生成1到20页之间的页数
+# class Task:
+#     #任务初始化
+#     def __init__(self,time):
+#          # time 为传入的任务创建时间，也就是入队时间
+#         self.timestamp = time
+#         self.pages = random.randrange(1,21)  # 随机生成1到20页之间的页数
 
-    def getStamp(self):
-        return self.timestamp
+#     def getStamp(self):
+#         return self.timestamp
 
-    def getPages(self):
-        return self.pages
+#     def getPages(self):
+#         return self.pages
     
-    def waitTime(self,currenttime):
-        # out_time为当前时间戳
-        return currenttime - self.timestamp
+#     def waitTime(self,currenttime):
+#         # out_time为当前时间戳
+#         return currenttime - self.timestamp
 
-def main(numSeconds,pagesPerMinute):
-    #numSeconds为总的实验时间，pagesPerMinute为每页打印所需要的时间
-    labPrinter = Printer(pagesPerMinute)   #初始化打印机
-    printQueue = Queue()  #初始化任务等待队列
-    watingtimes = []  #记录每个任务的等待时间
+# def main(numSeconds,pagesPerMinute):
+#     #numSeconds为总的实验时间，pagesPerMinute为每页打印所需要的时间
+#     labPrinter = Printer(pagesPerMinute)   #初始化打印机
+#     printQueue = Queue()  #初始化任务等待队列
+#     watingtimes = []  #记录每个任务的等待时间
 
-    for currentSeconds in range(numSeconds):
-        if newPrintTask():
-            task = Task(currentSecond)
-            printQueue.enqueue(task)
+#     for currentSeconds in range(numSeconds):
+#         if newPrintTask():
+#             task = Task(currentSecond)
+#             printQueue.enqueue(task)
 
-        if(not labPrinter.is_busy()) and (not printQueue.isEmpty()):  #打印机空闲并且有任务在等待
-            nexttask = printQueue.dequeue()  # 弹出下一个任务
-            watingtimes.append(nexttask.waitTime(currentSeconds))  # 计算并记录等待时间
-            labPrinter.startNew(nexttask)  #载入新的任务
-        labPrinter.tick()   #打印
-        averageWaite = sum(watingtimes) / len(watingtimes)
-        print("平均等待%6.2f秒  还剩%3d任务"%(averageWaite,printQueue.size()))
+#         if(not labPrinter.is_busy()) and (not printQueue.isEmpty()):  #打印机空闲并且有任务在等待
+#             nexttask = printQueue.dequeue()  # 弹出下一个任务
+#             watingtimes.append(nexttask.waitTime(currentSeconds))  # 计算并记录等待时间
+#             labPrinter.startNew(nexttask)  #载入新的任务
+#         labPrinter.tick()   #打印
+#         averageWaite = sum(watingtimes) / len(watingtimes)
+#         print("平均等待%6.2f秒  还剩%3d任务"%(averageWaite,printQueue.size()))
 
-def newPrintTask():
-    num = random.randrange(1,180)
-    if num == 180:
-        return True
-    else:
-        return False
+# def newPrintTask():
+#     num = random.randrange(1,180)
+#     if num == 180:
+#         return True
+#     else:
+#         return False
 
-if __name__ == '__main__':
-    for i in range(10):
-        simulation(3600,10)
+# if __name__ == '__main__':
+#     for i in range(10):
+#         simulation(3600,10)
 
 
 
@@ -188,6 +188,85 @@ if __name__ == '__main__':
 '''
     1.学生数变为20
     2.不局限在一个小时之内的话，这些学生
+'''
+
+import random
+from pythonds.basic.queue import Queue
+
+class Printer:
+    def __init__(self,ppm):
+        # 设置打印的速率
+        self.pagerate = ppm
+        self.currentTask = None
+        # 打印机当前任务的剩余时间
+        self.timeRemaining = 0
+
+    # 内部任务需要的时间计算函数
+    def tick(self):
+        if self.currentTask != None: 
+            self.timeRemaining = self.timeRemaining - 1
+            if self.timeRemaining <= 0:
+                self.currentTask = None
+    
+    # 切换打印机状态
+    def is_busy(self):
+        if self.currentTask != None:
+            return True
+        else:
+            return False
+
+    def startNew(self,newTask):
+        self.currentTask = newTask
+        self.timeRemaining = newTask.getPages()*60/self.pagerate
+
+
+class Task:
+    def __init__(self,time):
+        self.timestamp = time
+        self.pages = random.randrange(1,21)
+    
+    def getStamp(self):
+        return self.timestamp
+    
+    def getPages(self):
+        return self.pages
+    
+    def waitTime(self,currenttime):
+        return currenttime - self.timestamp
+
+
+
+def simulation(numSeconds,pagesPerMinute):
+    labPrinter = Printer(pagesPerMinute)
+    printQueue = Queue()
+    watingtimes = []
+
+    for currentSecond in range(numSeconds):
+        if newPrintTask():
+            task = Task(currentSecond)
+            printQueue.enqueue(task)
+        if(not labPrinter.is_busy()) and (not printQueue.isEmpty()):
+            nexttask = printQueue.dequeue()
+            watingtimes.append(nexttask.waitTime(currentSecond))
+            labPrinter.startNew(nexttask)
+
+        labPrinter.tick()
+    averageWait=sum(watingtimes)/len(watingtimes)
+    print("平均等待时间 %6.2f secs 剩下%3d任务"%(averageWait,printQueue.size()))
+def newPrintTask():
+    num = random.randrange(1,181)
+    if num == 180:
+        return True
+    else:
+        return False
+
+for i in range(10):
+    simulation(3600,10)
+
+
+'''
+    1. 学生数变为20
+    2. 不局限在一个小时之内的话，这些学生都打印完需要多长时间
 '''
 #一小时等于60分钟   一小时内有20次打印任务
 # import random

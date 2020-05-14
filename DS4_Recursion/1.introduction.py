@@ -97,19 +97,38 @@ print(to_str(769,16))
 可以用栈的方式实现递归
 
 '''
+# from pythonds.basic.stack import Stack
+# s = Stack()
+
+# def to_str(num,base):
+#     convert_str = '0123456789ABCDEf'
+#     while num > 0:
+#         if num < base:
+#             s.push(convert_str[num])
+#         else:
+#             s.push(convert_str[num%base])
+#         num = num//base
+#     result = ''
+#     while not s.isEmpty():
+#         result = result + s.pop()
+#     return result
+# print(to_str(769,16))
+# 125/10   12...5   1...2   0...1
+# (1)
+
 from pythonds.basic.stack import Stack
 s = Stack()
 
-def to_str(num,base):
-    convert_str = '0123456789ABCDEf'
+def shiliu(num,base):
     while num > 0:
+        co = '0123456789ABCDEF'
         if num < base:
-            s.push(convert_str[num])
+            s.push(co[num])
         else:
-            s.push(convert_str[num%base])
+            s.push(co[num%base])
         num = num//base
-    result = ''
+    cc = ''
     while not s.isEmpty():
-        result = result + s.pop()
-    return result
-print(to_str(769,16))
+        cc = cc + s.pop()
+    return cc
+print(shiliu(536,16))
