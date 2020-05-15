@@ -99,7 +99,7 @@ class Maze():
                             (columnsInMaze-1)/2+.5,
                             (rowsInMaze-1)/2+.5,)
 
-    # def draw_maze():
+    def draw_maze(self,x,y,color):
 
 mazeFileName = './maze.txt'
 maze = Maze(mazeFileName)

@@ -35,11 +35,12 @@
 
 '''
 
+
 # 通过ASCII转换成数字的散列函数
 
-def hash(astring,tablesize):
-    sum = 0
-    for pos in range(len(astring)):
-        sum = sum + ord(astring[pos])
-    return sum%tablesize
-print(hash('a',11)) 
+# def hash(astring,tablesize):
+#     sum = 0
+#     for pos in range(len(astring)):
+#         sum = sum + ord(astring[pos])
+#     return sum%tablesize
+# print(hash('a',11)) 
